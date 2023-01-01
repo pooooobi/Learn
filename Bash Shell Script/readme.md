@@ -242,16 +242,24 @@
         - 출력은 `-l` 옵션을 추가하고, 편집은 `-e` 옵션을 추가한다.
         - crontab에 등록된 모든 스케쥴을 제거할때는 `-r` 옵션을 사용하면 되는데, 자주 쓰지도 않고 중요하지도 않으니 사용 전 주의하자.
 
-3. 쉘 스크립트(Shell Script)
-    - 명령어 연속 실행
-        - `파이프라인(|)` : 파이프라인 왼쪽 명령결과 표준 스트림을 오른쪽 명령의 입력으로 사용
-        - `세미콜론(;)` : 세미콜론 왼쪽의 명령이 끝난 후 이어서 오른쪽의 명령을 실행함
-        - `AND 조건(&&)`
-            - AND의 연산이 하나라도 false일 경우 모든 결과가 false인 특징을 이용
-            - AND 좌측 명령/테스트의 결과가 true이면 우측의 명령을 실행
-            - AND 좌측 명령/테스트의 결과가 false이면 우측 명령을 실행하지 않음(이미 거짓이며, AND의 연산이 false 이므로)
-        - `OR 조건(||)`
-            - OR 연산의 하나라도 true일 경우 모든 결과가 true인 특징을 이용
-            - OR 좌측 명령/테스트의 결과가 true이면 우측 명령을 실행하지 않음(이미 참이며, OR 연산이 true 이므로)
-            - OR 좌측 명령/테스트의 결과가 false이면 우측 명령을 실행
-        - 참고 : [단락 평가(Short-circult Evaluation)](https://github.com/pooooobi/Swift/tree/main/Swift%20Theory/Operators/Advanced%20Operators), 리눅스도 같은 방식임.
+3. 쉘 스크립트 기본
+- 명령어 연속 실행
+    - `파이프라인(|)` : 파이프라인 왼쪽 명령결과 표준 스트림을 오른쪽 명령의 입력으로 사용
+    - `세미콜론(;)` : 세미콜론 왼쪽의 명령이 끝난 후 이어서 오른쪽의 명령을 실행함
+    - `AND 조건(&&)`
+        - AND의 연산이 하나라도 false일 경우 모든 결과가 false인 특징을 이용
+        - AND 좌측 명령/테스트의 결과가 true이면 우측의 명령을 실행
+        - AND 좌측 명령/테스트의 결과가 false이면 우측 명령을 실행하지 않음(이미 거짓이며, AND의 연산이 false 이므로)
+    - `OR 조건(||)`
+        - OR 연산의 하나라도 true일 경우 모든 결과가 true인 특징을 이용
+        - OR 좌측 명령/테스트의 결과가 true이면 우측 명령을 실행하지 않음(이미 참이며, OR 연산이 true 이므로)
+        - OR 좌측 명령/테스트의 결과가 false이면 우측 명령을 실행
+    - 참고 : [단락 평가(Short-circult Evaluation)](https://github.com/pooooobi/Swift/tree/main/Swift%20Theory/Operators/Advanced%20Operators), 리눅스도 같은 방식임.
+
+4. CLI(Command Line Interface)
+- nano
+    - 리눅스 터미널 환경에서 직관적인 사용자 인터페이스를 제공하는 편집 도구
+    - 학습 난이도가 매우 낮음
+- vim : Vi Improved
+    - 리눅스 터미널 환경에서 사용자 인터페이스를 제공하는 편집 도구
+    - vi의 업그레이드 버전이며, 최근에는 neovim이라는 이름으로 vim의 refector 버전이 나옴.
