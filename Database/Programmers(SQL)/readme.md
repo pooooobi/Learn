@@ -69,6 +69,22 @@
     SELECT *
     FROM ANIMAL_INS
     ORDER BY ANIMAL_ID
+
+    -- NULL 처리하기
+    SELECT ANIMAL_TYPE, IFNULL(NAME, 'No name') as NAME, SEX_UPON_INTAKE
+    FROM ANIMAL_INS
+
+    -- 이름이 있는 동물의 아이디
+    SELECT ANIMAL_ID
+    FROM ANIMAL_INS
+    WHERE NAME IS NOT NULL
+    ORDER BY ANIMAL_ID ASC
+
+    -- 이름이 없는 동물의 아이디
+    SELECT ANIMAL_ID
+    FROM ANIMAL_INS
+    WHERE NAME IS NULL
+    ORDER BY ANIMAL_ID ASC
     ```
 
 - 조건에 맞는 회원수 구하기
@@ -110,4 +126,53 @@
     FROM MEMBER_PROFILE
     WHERE TLNO IS NOT NULL AND DATE_OF_BIRTH like '%-03-%' AND GENDER = 'W'
     ORDER BY MEMBER_ID
+    ```
+
+- 경기도에 위치한 식품창고 목록 출력하기
+    ```sql
+    SELECT WAREHOUSE_ID, WAREHOUSE_NAME, ADDRESS, IFNULL(FREEZER_YN, 'N') as FREEZER_YN
+    FROM FOOD_WAREHOUSE
+    WHERE ADDRESS like '경기도%'
+    ORDER BY WAREHOUSE_ID ASC
+    ```
+
+- 나이 정보가 없는 회원 수 구하기
+    ```sql
+    SELECT COUNT(*) USERS
+    FROM USER_INFO
+    WHERE AGE IS NULL
+    ```
+
+- 12세 이하인 여자 환자 목록 출력하기
+    ```sql
+    SELECT PT_NAME, PT_NO, GEND_CD, AGE, IFNULL(TLNO, 'NONE') as TLNO
+    FROM PATIENT
+    WHERE AGE <= 12 AND GEND_CD = 'W'
+    ORDER BY AGE DESC, PT_NAME ASC
+    ```
+
+- 서울에 위치한 식당 목록 출력하기
+    ```sql
+    SELECT a.REST_ID, a.REST_NAME, a.FOOD_TYPE, a.FAVORITES, a.ADDRESS, ROUND(AVG(b.REVIEW_SCORE), 2) as SCORE
+    FROM REST_INFO a
+        INNER JOIN REST_REVIEW as b
+        ON a.REST_ID = b.REST_ID
+    WHERE a.ADDRESS LIKE '서울%'
+    GROUP BY a.REST_NAME
+    ORDER BY SCORE DESC, a.FAVORITES DESC
+    ```
+
+- 강원도에 위치한 생산공장 목록 출력하기
+    ```sql
+    SELECT FACTORY_ID, FACTORY_NAME, ADDRESS
+    FROM FOOD_FACTORY
+    WHERE ADDRESS LIKE '강원도%'
+    ORDER BY FACTORY_ID ASC
+    ```
+
+- 인기있는 아이스크림
+    ```sql
+    SELECT FLAVOR
+    FROM FIRST_HALF
+    ORDER BY TOTAL_ORDER DESC, SHIPMENT_ID ASC
     ```
