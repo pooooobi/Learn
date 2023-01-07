@@ -85,6 +85,18 @@
     FROM ANIMAL_INS
     WHERE NAME IS NULL
     ORDER BY ANIMAL_ID ASC
+
+    -- 최댓값 구하기
+    SELECT MAX(DATETIME)
+    FROM ANIMAL_INS
+
+    -- 최솟값 구하기
+    SELECT MIN(DATETIME)
+    FROM ANIMAL_INS
+
+    -- 동물 수 구하기
+    SELECT COUNT(*)
+    FROM ANIMAL_INS
     ```
 
 - 조건에 맞는 회원수 구하기
@@ -175,4 +187,49 @@
     SELECT FLAVOR
     FROM FIRST_HALF
     ORDER BY TOTAL_ORDER DESC, SHIPMENT_ID ASC
+    ```
+
+- 가격이 제일 비싼 식품의 정보 출력하기
+    ```sql
+    SELECT *
+    FROM FOOD_PRODUCT
+    ORDER BY PRICE DESC LIMIT 1
+    ```
+
+- 중복 제거하기
+    ```sql
+    SELECT COUNT(DISTINCT(NAME))
+    FROM ANIMAL_INS
+    WHERE NAME IS NOT NULL
+    ```
+
+- 조건에 맞는 도서와 저자 리스트 출력하기
+    ```sql
+    SELECT a.BOOK_ID, b.AUTHOR_NAME, DATE_FORMAT(a.PUBLISHED_DATE, '%Y-%m-%d') as PUBLISHED_DATE
+    FROM BOOK as a
+        INNER JOIN AUTHOR as b
+        ON a.AUTHOR_ID = b.AUTHOR_ID
+    WHERE a.CATEGORY = '경제'
+    ORDER BY PUBLISHED_DATE ASC
+    ```
+
+- 5월 식품들의 총매출 조회하기
+    ```sql
+    SELECT a.PRODUCT_ID, a.PRODUCT_NAME, (a.PRICE * SUM(b.AMOUNT)) as TOTAL_SALES
+    FROM FOOD_PRODUCT as a
+        INNER JOIN FOOD_ORDER as b
+        ON a.PRODUCT_ID = b.PRODUCT_ID
+    WHERE b.PRODUCE_DATE LIKE '%2022-05-%'
+    GROUP BY PRODUCT_ID
+    ORDER BY TOTAL_SALES DESC, PRODUCT_ID ASC
+    ```
+
+- 주문량이 많은 아이스크림들 조회하기
+    ```sql
+    SELECT a.FLAVOR
+    FROM FIRST_HALF as a
+        INNER JOIN JULY as b
+        ON a.FLAVOR = b.FLAVOR
+    GROUP BY a.FLAVOR
+    ORDER BY (SUM(a.TOTAL_ORDER) + SUM(b.TOTAL_ORDER)) DESC LIMIT 3
     ```

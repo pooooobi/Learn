@@ -9,7 +9,7 @@
 - insert
 ```sql
 INSERT INTO tableName
-(columm1, columm2, ...) # 단, 모든 컬럼일 경우 생략할 수 있다.
+(columm1, columm2, ...) -- 단, 모든 컬럼일 경우 생략할 수 있다.
 VALUES(value1, value2, ...);
 
 INSERT INTO table2
